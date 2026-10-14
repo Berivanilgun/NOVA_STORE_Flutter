@@ -14,11 +14,13 @@ Flutter ve Dart ile hazırlanmış eğitim amaçlı katalog uygulaması. Ana say
 | Flutter / Dart | Flutter `3.38.5` (stable), Dart `3.10.4` |
 | `flutter pub get` | Başarılı |
 | `flutter analyze` | Başarılı; analiz sorunu bulunmadı |
-| `flutter test` | 3 test başarılı, 2 test başarısız |
-| Ekran görüntüleri | `docs/screenshots/` içinde henüz PNG bulunmuyor |
-| Android/iOS cihaz kontrolü ve APK derleme | Bu güncellemede doğrulanmadı |
+| `flutter test` | 6 testin tamamı başarılı |
+| Ekran görüntüleri | Dört widget renderı ve normal/%130 metin boyutunda sekiz Android emülatör görüntüsü |
+| Android kontrolü | Pixel 5 emülatörü, Android 14; ana sayfa, arama/filtre, detay, sepet ve büyük metin akışları doğrulandı |
+| Release APK | Başarıyla derlendi ve emülatöre kuruldu |
+| iOS / fiziksel cihaz | Bu ortamda doğrulanmadı |
 
-Başarısız iki test `test/store_flow_test.dart` dosyasındaki yerel ürün yükleme ve ana sayfa–katalog–detay–sepet akış testleridir. İkisi de `openStore` içindeki `pumpAndSettle` çağrısında `pumpAndSettle timed out` hatası verdi. Bu nedenle test doğrulaması tamamlanmış değildir; ekran görüntüsü üretim betiği de testler başarılı olmadan görüntü üretimine geçmez.
+Akış testlerindeki zaman aşımı giderildi: uygulama açılışı gerçek asenkron zamanda çalıştırılıyor, ürün görselleri render öncesinde yükleniyor ve ekran görüntüsü testlerinde Material ikon fontu hazırlanıyor. Büyük metin, ortak sepet, demo açıklaması ve dolu sepetin yeniden başlatmada sıfırlanması için ek akış testi bulunur. Ayrıntılar: [doğrulama raporu](docs/DOGRULAMA.md).
 
 ## Özellikler
 
@@ -71,7 +73,7 @@ Mevcut test kapsamı:
 
 - `test/cart_test.dart`: Sepet adedi, toplam, son ürünü kaldırma ve model JSON dönüşümü.
 - `test/widget_test.dart`: Ana sayfanın açılması.
-- `test/store_flow_test.dart`: Yerel varlıklar, arama/kategori filtresi, boş sonuç, detay, sepet adedi ve temizleme akışı.
+- `test/store_flow_test.dart`: Yerel varlıklar, arama/kategori filtresi, boş sonuç, detay, sepet adedi/temizleme, %130 metin, ortak sepet, demo açıklaması ve yeniden başlatma akışları.
 
 ## Proje yapısı
 
@@ -98,15 +100,19 @@ Sayfa geçişleri `Navigator.push/pop`, ürün detayına veri aktarımı `Naviga
 
 ## Ekran görüntüleri
 
-Testlerdeki zaman aşımı giderildikten sonra:
+Widget renderlarını yeniden üretmek için:
 
 ```powershell
 .\scripts\verify.ps1 -CaptureScreenshots
 ```
 
-Betik analiz ve testler başarılı olursa Flutter widget ağacını 390 × 844 boyutunda render ederek `docs/screenshots/` altında `home.png`, `catalog.png`, `detail.png` ve `cart.png` üretir. Bunlar widget renderlarıdır; Android cihaz ekran görüntüsü değildir. Üretilen görseller ayrıca görsel olarak kontrol edilmelidir.
+Betik analiz ve testler başarılı olursa Flutter widget ağacını 390 × 844 boyutunda render ederek `docs/screenshots/` altında `home.png`, `catalog.png`, `detail.png` ve `cart.png` üretir. Bunlar widget renderlarıdır; Android cihaz ekran görüntüsü değildir. Üretilen dört render görsel olarak kontrol edildi. Android emülatöründen alınan gerçek ekran görüntüleri ayrıca `docs/screenshots/android/` klasöründedir.
 
-Ayrıntılar: [ekran görüntüsü üretim adımları](docs/screenshots/README.md).
+| Ana sayfa | Katalog | Ürün detayı | Sepet |
+| --- | --- | --- | --- |
+| <img src="docs/screenshots/android/home.png" width="180" alt="Android ana sayfa"> | <img src="docs/screenshots/android/catalog.png" width="180" alt="Android katalog"> | <img src="docs/screenshots/android/detail.png" width="180" alt="Android ürün detayı"> | <img src="docs/screenshots/android/cart.png" width="180" alt="Android sepet"> |
+
+Ayrıntılar ve büyük metin görüntüleri: [ekran görüntüsü üretim adımları](docs/screenshots/README.md).
 
 ## Android APK
 
@@ -114,8 +120,8 @@ Ayrıntılar: [ekran görüntüsü üretim adımları](docs/screenshots/README.m
 flutter build apk --release
 ```
 
-Çıktı: `build/app/outputs/flutter-apk/app-release.apk`. APK derlemesi ve cihazda çalıştırma bu güncellemede doğrulanmadı.
+Çıktı: `build/app/outputs/flutter-apk/app-release.apk`. Release APK başarıyla derlendi ve Pixel 5 emülatöründe çalıştırıldı. Mevcut Gradle ayarı release derlemesini debug anahtarıyla imzalar; bu APK demo kullanımına yöneliktir.
 
 ## Teslim belgeleri
 
-[Yönerge karşılaştırması](docs/YONERGE_UYUM.md) ve [kabul kontrol listesi](docs/KONTROL_LISTESI.md) depoda bulunur. Bu belgelerde önceki çalışma ortamına ait durum notları vardır; güncel analiz/test sonuçları için bu README'nin “Güncel durum” bölümünü esas alın. Test hataları, ekran görüntüleri ve cihaz kontrolleri tamamlanmadan teslimin tüm kontrolleri tamamlanmış sayılmaz.
+[Yönerge karşılaştırması](docs/YONERGE_UYUM.md) ve [kabul kontrol listesi](docs/KONTROL_LISTESI.md) depoda bulunur. Analiz, testler, Android emülatör kontrolü ve ekran görüntüleri tamamlandı. Depo public olarak erişilebilir. Doğrulama kapsamı Android emülatörü ve widget testleridir; fiziksel cihaz ve iOS kontrolleri yapılmadı.
