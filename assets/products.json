@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "name": "Studio Kulaklık",
+    "category": "Elektronik",
+    "priceKurus": 149900,
+    "description": "Günlük kullanım için yumuşak pedli, ayarlanabilir kablolu kulaklık.",
+    "image": "assets/images/headphones.png"
+  },
+  {
+    "id": 2,
+    "name": "Daypack Çanta",
+    "category": "Aksesuar",
+    "priceKurus": 89900,
+    "description": "Geniş ana bölme ve ayarlanabilir askılarla günlük sırt çantası.",
+    "image": "assets/images/bag.png"
+  },
+  {
+    "id": 3,
+    "name": "Seramik Kupa",
+    "category": "Yaşam",
+    "priceKurus": 24900,
+    "description": "Minimal tasarımlı 300 ml seramik kupa. Elde yıkama önerilir.",
+    "image": "assets/images/cup.png"
+  },
+  {
+    "id": 4,
+    "name": "Akıllı Saat",
+    "category": "Elektronik",
+    "priceKurus": 219900,
+    "description": "Bildirim ve aktivite takibi konseptli demo ürün.",
+    "image": "assets/images/watch.png"
+  },
+  {
+    "id": 5,
+    "name": "Masa Lambası",
+    "category": "Yaşam",
+    "priceKurus": 74900,
+    "description": "Çalışma masası için sade, yönlendirilebilir masa lambası.",
+    "image": "assets/images/lamp.png"
+  },
+  {
+    "id": 6,
+    "name": "Urban Sneaker",
+    "category": "Giyim",
+    "priceKurus": 129900,
+    "description": "Günlük yürüyüşler için hafif tabanlı spor ayakkabı.",
+    "image": "assets/images/shoe.png"
+  },
+  {
+    "id": 7,
+    "name": "Basic Tişört",
+    "category": "Giyim",
+    "priceKurus": 39900,
+    "description": "Rahat kesimli, pamuklu günlük tişört.",
+    "image": "assets/images/shirt.png"
+  },
+  {
+    "id": 8,
+    "name": "Termos Şişe",
+    "category": "Aksesuar",
+    "priceKurus": 54900,
+    "description": "Paslanmaz çelik gövdeli, 500 ml kapasiteli termos şişe.",
+    "image": "assets/images/bottle.png"
+  }
+]

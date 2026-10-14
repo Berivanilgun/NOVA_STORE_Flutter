@@ -1,0 +1,11 @@
+.dart_tool/
+.packages
+build/
+.flutter-plugins*
+android/local.properties
+*.iml
+
+# Yerel doğrulama araçları ve geçici dosyalar
+tmp/
+
+.idea/
